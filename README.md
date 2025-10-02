@@ -1,36 +1,87 @@
-# ia-tetris
-Projecto de Inteligência Artificial 2021 - Tetris
+# IA-Tetris
 
-## How to install
+Autonomous Agent for Tetris – Artificial Intelligence Project 2021/2022
 
-Make sure you are running Python 3.7 or higher
+Developed by:
 
-`$ pip install -r requirements.txt`
+- Nuno Cunha (98124)
+- Bernardo Kaluza (97521)
+- Pedro Lima (97860)
+- Diogo Gomes
+- Luís Seabra Lopes
 
-*Tip: you might want to create a virtualenv first*
+## Demo
 
-## How to play
+Check out the demo video here: https://www.youtube.com/watch?v=2Kd3KGwfX5Y
 
-open 3 terminals:
+## Project Overview
 
-`$ python3 server.py`
+This project implements an autonomous agent capable of playing Tetris. It was developed as part of the Artificial Intelligence course (2021/2022).
 
-`$ python3 viewer.py`
+The system is divided into three components:
 
-`$ python3 client.py`
+- Server – runs the game logic.
+- Viewer – visualizes the game in real-time.
+- Client – controls the Tetris agent or allows human play.
 
-to play using the sample client make sure the client pygame window has focus
+The AI agent makes decisions by simulating possible moves, evaluating game states, and selecting the optimal sequence of actions.
 
-### Keys
+## AI Agent Architecture
+### Piece Detection
 
-Directions: arrows
+- Detects the current piece (state['piece']) using a dictionary that maps spawn positions to the corresponding shapes and rotations.
+- Returns a Shape object and its rotation index.
 
-## Debug Installation
+### Simulation
 
-Make sure pygame is properly installed:
+- Calculates all possible positions for the current piece.
+- Assigns a score to each possible move.
+- Returns the move with the highest score.
 
-python -m pygame.examples.aliens
+### GenerateInputs
 
-# Tested on:
-- OSX Big Sur 11.6
+- Simulates placing a copy of the piece in a target position.
+- Returns the required key sequence and final position.
 
+### Move Class
+
+- Calculates scores for all potential positions.
+- Scoring is based on game state features (e.g., holes, height, completed lines).
+- Weights were tuned via trial-and-error for performance across multiple seeds.
+
+## Installation
+
+Make sure you are running Python 3.7+.
+
+    $ pip install -r requirements.txt
+
+
+Tip: It’s recommended to use a virtual environment.
+
+## How to Play
+
+Open 3 terminals and run:
+
+    $ python3 server.py
+    $ python3 viewer.py
+    $ python3 client.py
+
+
+- If you want to play manually, use the arrow keys in the Pygame client window.
+- If you let the AI agent run, it will automatically play the game.
+
+## Controls
+
+- Left / Right arrows → Move piece
+- Up arrow → Rotate
+- Down arrow → Soft drop
+
+## Debugging
+
+Check if pygame is correctly installed:
+
+    $ python -m pygame.examples.aliens
+
+## Tested On
+
+macOS Big Sur 11.6
